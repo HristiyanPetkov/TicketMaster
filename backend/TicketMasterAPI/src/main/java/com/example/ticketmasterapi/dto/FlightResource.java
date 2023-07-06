@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class FlightResource {
     private String arrival;
     private String departure;
-    private Timestamp date;
     private String flightNumber;
+    private Timestamp date;
     private float price;
 }
