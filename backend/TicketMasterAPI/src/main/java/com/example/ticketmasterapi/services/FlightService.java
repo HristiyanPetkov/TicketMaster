@@ -1,4 +1,8 @@
 package com.example.ticketmasterapi.services;
 
-public class FlightService {
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+
+public interface FlightService {
 }

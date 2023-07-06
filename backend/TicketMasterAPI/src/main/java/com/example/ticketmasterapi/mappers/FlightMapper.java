@@ -1,4 +1,7 @@
 package com.example.ticketmasterapi.mappers;
 
-public class FlightMapper {
+import org.mapstruct.Mapper;
+
+@Mapper
+public interface FlightMapper {
 }
