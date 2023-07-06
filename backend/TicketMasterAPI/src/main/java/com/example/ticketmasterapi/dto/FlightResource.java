@@ -11,7 +11,4 @@ public class FlightResource {
     private Timestamp date;
     private String flightNumber;
     private float price;
-    public float getPrice() {
-        return price;
-    }
 }

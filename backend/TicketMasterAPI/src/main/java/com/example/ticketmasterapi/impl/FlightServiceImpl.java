@@ -26,4 +26,9 @@ public class FlightServiceImpl implements FlightService {
         List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAndDepartureAndDate(origin, destination, date));
         return flights.stream().min((f1, f2) -> Float.compare(f1.getPrice(), f2.getPrice())).orElse(null);
     }
+
+    @Override
+    public FlightResource addFlight(FlightResource flight) {
+        return FLIGHT_MAPPER.toFlightResource(flightRepository.save(FLIGHT_MAPPER.fromFlightResource(flight)));
+    }
 }
