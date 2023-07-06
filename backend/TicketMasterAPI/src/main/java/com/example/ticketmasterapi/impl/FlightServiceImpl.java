@@ -1,4 +1,4 @@
 package com.example.ticketmasterapi.impl;
 
-public class impl {
+public class FlightServiceImpl {
 }

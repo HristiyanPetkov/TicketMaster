@@ -1,4 +1,4 @@
 package com.example.ticketmasterapi.dto;
 
-public class resource {
+public class FlightResource {
 }

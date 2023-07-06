@@ -1,4 +1,4 @@
 package com.example.ticketmasterapi.services;
 
-public class Service {
+public class FlightService {
 }
