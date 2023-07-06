@@ -1,20 +1,22 @@
 package com.example.ticketmasterapi.controllers;
 
+import com.example.ticketmasterapi.clients.AviationStackConnection;
 import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.services.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/ticketmaster")
 @RequiredArgsConstructor
 public class FlightController {
     private final FlightService flightService;
+    private final AviationStackConnection aviationStackConnection;
+    @GetMapping
+    public ResponseEntity<?> getFlights() {
+        return ResponseEntity.ok(aviationStackConnection.getFlights());
+    }
     @GetMapping("/get")
     public ResponseEntity<?> getFlight(@RequestBody FlightResource flightResource) {
         return ResponseEntity.ok(flightService.getFlight(flightResource.getArrival(), flightResource.getDeparture(), flightResource.getDate()));

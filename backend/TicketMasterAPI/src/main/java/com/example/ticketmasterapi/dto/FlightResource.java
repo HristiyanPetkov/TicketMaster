@@ -10,5 +10,6 @@ public class FlightResource {
     private String departure;
     private String flightNumber;
     private Timestamp date;
-    private float price;
+    private Float price;
+    private Integer seats;
 }

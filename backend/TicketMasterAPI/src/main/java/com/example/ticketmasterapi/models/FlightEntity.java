@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 @Entity
 @Data
 public class FlightEntity {
@@ -14,13 +12,10 @@ public class FlightEntity {
     @GeneratedValue
     private Long id;
 
-    private String arrival;
-
-    private String departure;
-
-    private Timestamp date;
-
     private String flightNumber;
+    private String flightDate;
+    private String departureAirport;
+    private String arrivalAirport;
+    private String IATACode;
 
-    private float price;
 }
