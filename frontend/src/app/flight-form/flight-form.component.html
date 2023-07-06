@@ -1,40 +1,42 @@
-<div>
-  <label for="from">
-    Starting location
-  </label>
-  <br />
-  <input [(ngModel)]="flight.from">
-</div>
-<div>
-  <label for="to">
-    Destination
-  </label>
-  <br />
-  <input [(ngModel)]="flight.to">
-</div>
-<div>
-  <label for="ammount">
-    Ammount
-  </label>
-  <br />
-  <input [(ngModel)]="flight.ammount">
-</div>
-<div>
-  <label for="date">
-    Arrival date
-  </label>
-  <br />
-  <mat-form-field class="example-full-width">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)]="flight.date">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div>
-<div>
-  <form (ngSubmit)="get()" #flightForm="ngForm">
-    <button type="submit" [disabled]="!flightForm.form.valid"
-        class="btn btn-info">Submit</button>
-  </form>
+<div class="text-5xl">
+  <div>
+    <label for="from">
+      Starting location
+    </label>
+    <br />
+    <input [(ngModel)]="flight.from" class="text-4xl text-black mb-10 pl-2 border-4 border-gray-400 rounded">
+  </div>
+  <div>
+    <label for="to">
+      Destination
+    </label>
+    <br />
+    <input [(ngModel)]="flight.to" class="text-4xl text-black mb-10 pl-2 border-4 border-gray-400 rounded">
+  </div>
+  <div>
+    <label for="ammount">
+      Ammount
+    </label>
+    <br />
+    <input [(ngModel)]="flight.ammount" class="text-4xl text-black mb-10 pl-2 border-4 border-gray-400 rounded">
+  </div>
+  <div>
+    <label for="date">
+      Arrival date
+    </label>
+    <br />
+    <mat-form-field class="example-full-width bg-gray-400 text-white mb-16 rounded">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [min]="minDate" [matDatepicker]="picker" [(ngModel)]="flight.date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <form (ngSubmit)="get()" #flightForm="ngForm" class="">
+      <button type="submit" [disabled]="!flightForm.form.valid"
+          class="btn btn-info bg-gray-400 text-white hover:bg-gray-400 focus:outline-none outline-none border-gray-400">Submit</button>
+    </form>
+  </div>
 </div>

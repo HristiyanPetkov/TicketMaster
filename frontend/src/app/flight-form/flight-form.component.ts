@@ -18,7 +18,7 @@ export class FlightFormComponent {
     ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear);
-    this.flight = new Flight("", "", new Date(), 0);
+    this.flight = new Flight("", "", new Date(), 1);
   }
 
   get() {
