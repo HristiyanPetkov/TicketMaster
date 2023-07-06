@@ -17,13 +17,13 @@ public class FlightServiceImpl implements FlightService {
     private final FlightRepository flightRepository;
     @Override
     public FlightResource getFlight(String origin, String destination, Timestamp date) {
-        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAndDepartureAndDate(origin, destination, date));
+        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAndDepartureAndDateAfter(origin, destination, date));
         return flights.stream().findFirst().orElse(null);
     }
 
     @Override
     public FlightResource getCheapestDirectFlight(String origin, String destination, Timestamp date) {
-        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAndDepartureAndDate(origin, destination, date));
+        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAndDepartureAndDateAfter(origin, destination, date));
         return flights.stream().min((f1, f2) -> Float.compare(f1.getPrice(), f2.getPrice())).orElse(null);
     }
 

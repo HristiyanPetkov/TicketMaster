@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 @RestController
 @RequestMapping("/api/v1/ticketmaster")
 @RequiredArgsConstructor
@@ -18,8 +21,8 @@ public class FlightController {
         return ResponseEntity.ok(aviationStackConnection.getFlights());
     }
     @GetMapping("/get")
-    public ResponseEntity<?> getFlight(@RequestBody FlightResource flightResource) {
-        return ResponseEntity.ok(flightService.getFlight(flightResource.getArrival(), flightResource.getDeparture(), flightResource.getDate()));
+    public ResponseEntity<?> getFlight(@RequestParam String arrival, @RequestParam String departure, @RequestParam String date) {
+        return ResponseEntity.ok(flightService.getFlight(arrival, departure, Timestamp.valueOf(date.replaceAll("[a-zA-Z]", " "))));
     }
 
     @GetMapping("/getCheapestDirect")
