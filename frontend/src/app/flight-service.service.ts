@@ -20,9 +20,10 @@ export class FlightServiceService {
 
   public get(flight: Flight): Observable<Result> {
     const params = new HttpParams()
-      .set('arrival', flight.to)
-      .set('departure', flight.from)
-      .set('date', flight.date.toISOString());
+      .set('arrivalAirport', flight.to)
+      .set('departureAirport', flight.from)
+      .set('arrival_date', new Date(flight.arrivalDate).toISOString())
+      .set('departure_date', new Date(flight.departureDate).toISOString());
 
     return this.http.get<Result>(this.flightUrl, { params: params });
   }
