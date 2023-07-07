@@ -1,5 +1,7 @@
 package com.example.ticketmasterapi.mappers;
 
+import com.example.ticketmasterapi.clients.amadeus.dto.FlightDtoAm;
+import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.models.FlightEntity;
@@ -30,6 +32,9 @@ public interface FlightMapper {
     List<FlightEntity> fromFlightResources(List<FlightResource> flightResourceList);
 
     List<FlightEntity> fromFlights(List<FlightDto> flightDtos);
+
+    List<FlightEntity> fromFlightsAm(List<FlightDtoAm> flightDtosAm);
+
 
 }
 
