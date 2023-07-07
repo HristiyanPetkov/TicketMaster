@@ -3,14 +3,15 @@ package com.example.ticketmasterapi.clients.aviationstack.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import java.util.List;
+import java.sql.Timestamp;
 
 @JsonIgnoreProperties
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class FlightsResponseDto {
-    public List<Flight> data;
+public class FlightDto {
+    public Timestamp flight_date;
+    public Flight flight;
+    public Airport departure;
+    public Airport arrival;
 }

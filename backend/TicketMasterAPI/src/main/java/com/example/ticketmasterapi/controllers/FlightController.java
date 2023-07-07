@@ -1,9 +1,7 @@
 package com.example.ticketmasterapi.controllers;
 
-import com.example.ticketmasterapi.clients.aviationstack.AviationStackConnection;
-import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
-import com.example.ticketmasterapi.dao.FlightRepository;
-import com.example.ticketmasterapi.models.FlightEntity;
+import com.example.ticketmasterapi.clients.aviationstack.AviationStackClient;
+import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import com.example.ticketmasterapi.services.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -20,13 +17,10 @@ import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
 @RequiredArgsConstructor
 public class FlightController {
     private final FlightService flightService;
-    private final FlightRepository flightRepository;
-    private final AviationStackConnection aviationStackConnection;
+    private final AviationStackClient aviationStackClient;
     @GetMapping("/flights")
     public ResponseEntity<?> getFlights() {
-        List<Flight> flightsDto = aviationStackConnection.getFlights();
-        List<FlightEntity> flights = FLIGHT_MAPPER.fromFlights(flightsDto);
-        flightRepository.saveAll(flights);
+        List<FlightDto> flightsDto = aviationStackClient.getFlights();
         return ResponseEntity.ok(flightsDto);
     }
 

@@ -1,9 +1,7 @@
 package com.example.ticketmasterapi.services.impl;
 
-import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
 import com.example.ticketmasterapi.dao.FlightRepository;
 import com.example.ticketmasterapi.dto.FlightResource;
-import com.example.ticketmasterapi.models.FlightEntity;
 import com.example.ticketmasterapi.services.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
