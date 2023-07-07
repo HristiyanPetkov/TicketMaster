@@ -1,5 +1,6 @@
 package com.example.ticketmasterapi.mappers;
 
+import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
 import com.example.ticketmasterapi.clients.amadeus.dto.FlightDtoAm;
 import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
@@ -17,9 +18,15 @@ public interface FlightMapper {
 
     FlightResource toFlightResource(FlightEntity flight);
 
+    @Mapping(target = "arrivalDate", source =    "flightResource.arrival_date")
+    @Mapping(target = "departureDate", source = "flightResource.departure_date")
+    @Mapping(target = "departureAirport", source = "flightResource.departureAirport")
+    @Mapping(target = "arrivalAirport", source = "flightResource.arrivalAirport")
+    @Mapping(target = "flightNumber", source = "flightResource.flightNumber")
+    @Mapping(target = "price", source = "flightResource.price")
     FlightEntity fromFlightResource(FlightResource flightResource);
 
-    @Mapping(target = "date", source = "flightDto.flight_date")
+    @Mapping(target = "departureDate", source = "flightDto.flight_date")
     @Mapping(target = "departureAirport", source = "flightDto.departure.airport")
     @Mapping(target = "departureIata", source = "flightDto.departure.iata")
     @Mapping(target = "arrivalAirport", source = "flightDto.arrival.airport")
@@ -27,14 +34,12 @@ public interface FlightMapper {
     @Mapping(target = "flightNumber", source = "flightDto.flight.number")
     FlightEntity fromFlight(FlightDto flightDto);
 
+
     List<FlightResource> toFlightResources(List<FlightEntity> flightList);
 
     List<FlightEntity> fromFlightResources(List<FlightResource> flightResourceList);
 
     List<FlightEntity> fromFlights(List<FlightDto> flightDtos);
-
-    List<FlightEntity> fromFlightsAm(List<FlightDtoAm> flightDtosAm);
-
 
 }
 

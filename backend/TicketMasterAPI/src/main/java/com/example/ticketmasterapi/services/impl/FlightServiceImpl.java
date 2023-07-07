@@ -6,6 +6,7 @@ import com.example.ticketmasterapi.services.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -42,9 +43,27 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightResource getFlight(String origin, String destination, Timestamp date) {
-        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAirportAndDepartureAirportAndDateAfter(origin, destination, date));
-        return flights.stream().findFirst().orElse(null);
+    public FlightResource getFlight(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate) {
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        long yesterdayInMillis = currentDate.getTime() - (24 * 60 * 60 * 1000);
+        Timestamp yesterday = new Timestamp(yesterdayInMillis);
+        if(departureDate.after(yesterday)) {
+            System.out.println(1);
+            List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAirportAndDepartureAirportAndDepartureDateAfter(origin, destination, departureDate));
+            System.out.println(flights.stream().findFirst().orElse(null));
+            return flights.stream().findFirst().orElse(null);
+        } else if(arrivalDate.after(yesterday)) {
+            System.out.println(2);
+            List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(flightRepository.findByArrivalAirportAndDepartureAirportAndArrivalDateAfter(origin, destination, arrivalDate));
+            return flights.stream().findFirst().orElse(null);
+        }
+        System.out.println(3);
+        return null;
+    }
+
+    @Override
+    public Object addFlight(FlightResource flightResource) {
+        return FLIGHT_MAPPER.toFlightResource(flightRepository.save(FLIGHT_MAPPER.fromFlightResource(flightResource)));
     }
 
 }

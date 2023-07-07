@@ -1,5 +1,6 @@
 package com.example.ticketmasterapi.controllers;
 
+import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.clients.aviationstack.AviationStackClient;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import com.example.ticketmasterapi.services.FlightService;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
-
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -25,8 +25,8 @@ public class FlightController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getFlight(@RequestParam String arrival, @RequestParam String departure, @RequestParam String date) {
-        return ResponseEntity.ok(flightService.getFlight(arrival, departure, Timestamp.valueOf(date.replaceAll("[a-zA-Z]", " "))));
+    public ResponseEntity<?> getFlight(@RequestParam String arrivalAirport, @RequestParam String departureAirport, @RequestParam String arrival_date, @RequestParam String departure_date) {
+        return ResponseEntity.ok(flightService.getFlight(arrivalAirport, departureAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
     }
 
 //    @GetMapping("/getCheapestDirect")
@@ -34,8 +34,9 @@ public class FlightController {
 //        return ResponseEntity.ok(flightService.getCheapestDirectFlight(flightResource.getArrival(), flightResource.getDeparture(), flightResource.getDate()));
 //    }
 //
-//    @PostMapping("/add")
-//    public ResponseEntity<?> addFlight(@RequestBody FlightResource flightResource) {
-//        return ResponseEntity.ok(flightService.addFlight(flightResource));
-//    }
+    @PostMapping("/add")
+    public ResponseEntity<?> addFlight(@RequestBody FlightResource flightResource) {
+        System.out.println(flightResource);
+        return ResponseEntity.ok(flightService.addFlight(flightResource));
+    }
 }

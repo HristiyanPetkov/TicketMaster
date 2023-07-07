@@ -14,5 +14,4 @@ public class FlightDtoAm {
     public Timestamp lastTicketingDate;
     public Itineraries itineraries;
     public Price price;
-
 }

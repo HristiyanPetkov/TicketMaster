@@ -10,5 +10,7 @@ public interface FlightService {
     FlightResource save(FlightResource flightResource);
     FlightResource update(FlightResource flightResource, Long id);
     void delete(Long id);
-    FlightResource getFlight(String origin, String destination, Timestamp date);
+    FlightResource getFlight(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate);
+
+    Object addFlight(FlightResource flightResource);
 }
