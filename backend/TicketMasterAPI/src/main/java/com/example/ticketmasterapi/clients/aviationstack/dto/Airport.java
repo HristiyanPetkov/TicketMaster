@@ -1,4 +1,4 @@
-package com.example.ticketmasterapi.clients.dto;
+package com.example.ticketmasterapi.clients.aviationstack.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

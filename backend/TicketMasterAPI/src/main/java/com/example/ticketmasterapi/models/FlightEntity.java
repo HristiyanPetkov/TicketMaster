@@ -16,8 +16,10 @@ public class FlightEntity {
 
     private String flightNumber;
     private Timestamp date;
-    private String departure;
-    private String arrival;
-    private String IATACode;
-
+    private String departureAirport;
+    private String arrivalAirport;
+    private String departureIata;
+    private String arrivalIata;
+    private Float price;
+    private Integer seats;
 }

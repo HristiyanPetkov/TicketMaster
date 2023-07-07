@@ -1,4 +1,4 @@
-package com.example.ticketmasterapi.clients.dto;
+package com.example.ticketmasterapi.clients.aviationstack.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PlanesResponseDto {
+public class FlightsResponseDto {
     public List<Flight> data;
 }

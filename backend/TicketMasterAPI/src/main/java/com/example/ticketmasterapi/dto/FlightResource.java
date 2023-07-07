@@ -6,10 +6,9 @@ import java.sql.Timestamp;
 
 @Data
 public class FlightResource {
-    private String arrival;
-    private String departure;
     private String flightNumber;
     private Timestamp date;
+    private String arrivalAirport;
+    private String departureAirport;
     private Float price;
-    private Integer seats;
 }
