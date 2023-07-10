@@ -14,7 +14,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
@@ -54,8 +53,11 @@ public class AviationStackClient {
 
     public void addAirports(List<FlightDto> flights){
         for(FlightDto flightDto : flights) {
-            lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByDeparture(flightDto));
-            lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByArrival(flightDto));
+            if(lookupTableRepository.notExistsByAirportAndIATA(flightDto.departure.airport, flightDto.departure.iata))
+                lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByDeparture(flightDto));
+
+            if(lookupTableRepository.notExistsByAirportAndIATA(flightDto.arrival.airport, flightDto.arrival.iata))
+                lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByArrival(flightDto));
         }
     }
 }
