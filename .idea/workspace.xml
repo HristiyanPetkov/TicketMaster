@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="Added lookup table and functionalities for said table.">
-      <change afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/controllers/LookupTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/FlightMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/FlightMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/LookupTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/LookupTableService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/FlightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/FlightServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/LookupTableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/LookupTableServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +111,7 @@
       <updated>1688638179705</updated>
       <workItem from="1688638181885" duration="5592000" />
       <workItem from="1688716079960" duration="13111000" />
-      <workItem from="1688987541263" duration="2471000" />
+      <workItem from="1688987541263" duration="6457000" />
     </task>
     <task id="LOCAL-00001" summary="temporary files for now">
       <option name="closed" value="true" />
@@ -150,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688978708179</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lookup table requests">
+      <option name="closed" value="true" />
+      <created>1688990046133</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688990046133</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +163,8 @@
     <MESSAGE value="temporary files for now" />
     <MESSAGE value="Added add function for testing" />
     <MESSAGE value="Added lookup table and functionalities for said table." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added lookup table and functionalities for said table." />
+    <MESSAGE value="Lookup table requests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lookup table requests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
