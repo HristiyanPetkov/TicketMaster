@@ -13,4 +13,6 @@ public interface LookupTableRepository extends JpaRepository<LookupTableEntity, 
     LookupTableEntity getLookupTableEntityByAirport(String airport);
 
     List<LookupTableEntity> getAirportsByAirportContaining(String partialAirport);
+
+    boolean notExistsByAirportAndIATA(String Airport, String IATA);
 }
