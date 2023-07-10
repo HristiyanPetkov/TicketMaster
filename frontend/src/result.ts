@@ -4,7 +4,7 @@ export class Result {
     public arrivalAirport: string,
     public departureDate: Date,
     public arrivalDate: Date,
-    public ammount: number,
+    public amount: number,
     public cost: number,
     public iota: string,
     public stops: string[],

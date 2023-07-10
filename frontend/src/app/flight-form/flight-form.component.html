@@ -1,36 +1,41 @@
-<div class="text-5xl">
-  <div>
-    <label for="from">
-      Starting location
-    </label>
-    <br />
-    <input [(ngModel)]="flight.from" class="text-4xl text-black mb-10 pl-2 border-4 border-gray-400 rounded">
+<form (ngSubmit)="get()" class="max-w-6xl mx-auto bg-blue-900 p-8 rounded shadow-lg">
+  <div class="relative">
+    <label for="from" class="text-white text-4xl font-bold mb-2">From</label>
+    <input type="text" id="from" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="fromTerm" (input)="searchFrom()" [ngModelOptions]="{ standalone: true }" placeholder="Enter From">
+    <ul *ngIf="fromResults.length > 0" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
+      <li *ngFor="let result of fromResults" class="cursor-pointer px-4 py-3 text-3xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectFrom(result)">{{ result.airport }} ({{ result.iata }})</li>
+    </ul>
   </div>
-  <div>
-    <label for="to">
-      Destination
-    </label>
-    <br />
-    <input [(ngModel)]="flight.to" class="text-4xl text-black mb-10 pl-2 border-4 border-gray-400 rounded">
+  <div class="relative mt-6">
+    <label for="to" class="text-white text-4xl font-bold mb-2">To</label>
+    <input type="text" id="to" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="toTerm" (input)="searchTo()" [ngModelOptions]="{ standalone: true }" placeholder="Enter To">
+    <ul *ngIf="toResults.length > 0" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
+      <li *ngFor="let result of toResults" class="cursor-pointer px-4 py-3 text-xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectTo(result)">{{ result.airport }} ({{ result.iata }})</li>
+    </ul>
   </div>
-  <div>
-    <label for="ammount">
-      Ammount
-    </label>
-    <br />
-    <input [(ngModel)]="flight.ammount" class="text-4xl text-black mb-10 pl-2 border-4 border-gray-400 rounded">
+  <div class="w-full mt-6">
+    <label for="tickets" class="text-white text-4xl font-bold mb-2">Number of Tickets</label>
+    <input type="number" id="tickets" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="flight.amount" [ngModelOptions]="{ standalone: true }" placeholder="Enter Number of Tickets">
   </div>
-  <div>
-    <label for="arrival-date">Arrival Date:</label>
-    <input type="date" [(ngModel)]="flight.arrivalDate" id="arrival-date" class="example-full-width bg-gray-400 text-white mb-16 rounded">
-
-    <label for="departure-date">Departure Date:</label>
-    <input type="date" [(ngModel)]="flight.departureDate" id="departure-date" class="example-full-width bg-gray-400 text-white mb-16 rounded">
+  <div class="flex flex-wrap justify-between mt-6">
+    <div class="w-full md:w-5/12 mb-4 md:mb-0">
+      <div class="flex items-center">
+        <span class="text-white text-4xl font-bold mb-2 mr-2">Departure</span>
+        <button type="button" class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center focus:outline-none" (click)="toggleDeparture()">
+          <span class="h-4 w-4 rounded-full bg-blue-500"></span>
+        </button>
+      </div>
+      <input *ngIf="showDeparture" type="date" id="departure" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full mt-2" [(ngModel)]="flight.departureDate" [ngModelOptions]="{ standalone: true }" placeholder="Select Departure Date">
+    </div>
+    <div class="w-full md:w-5/12">
+      <div class="flex items-center">
+        <span class="text-white text-4xl font-bold mb-2 mr-2">Arrival</span>
+        <button type="button" class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center focus:outline-none" (click)="toggleArrival()">
+          <span class="h-4 w-4 rounded-full bg-blue-500"></span>
+        </button>
+      </div>
+      <input *ngIf="showArrival" type="date" id="arrival" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full mt-2" [(ngModel)]="flight.arrivalDate" [ngModelOptions]="{ standalone: true }" placeholder="Select Arrival Date">
+    </div>
   </div>
-  <div>
-    <form (ngSubmit)="get()" #flightForm="ngForm" class="">
-      <button type="submit"
-          class="btn btn-info bg-gray-400 text-white hover:bg-gray-400 focus:outline-none outline-none border-gray-400">Submit</button>
-    </form>
-  </div>
-</div>
+  <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 mt-8 rounded">Search</button>
+</form>

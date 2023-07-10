@@ -14,7 +14,7 @@ export class FlightServiceService {
 
   constructor(private http: HttpClient) {
 
-    this.flightUrl = 'http://127.0.0.1:8080/api/v1/ticketmaster/get'
+    this.flightUrl = 'http://127.0.0.1:8080/api/v1/ticketmaster/'
 
   }
 
@@ -25,6 +25,13 @@ export class FlightServiceService {
       .set('arrival_date', new Date(flight.arrivalDate).toISOString())
       .set('departure_date', new Date(flight.departureDate).toISOString());
 
-    return this.http.get<Result>(this.flightUrl, { params: params });
+    return this.http.get<Result>(this.flightUrl + 'get', { params: params });
+  }
+
+  public getSuggestions(query: string): Observable<string[]> {
+    const params = new HttpParams()
+      .set('query', query);
+
+    return this.http.get<string[]>(this.flightUrl + 'search', { params: params });
   }
 }
