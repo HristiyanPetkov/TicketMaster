@@ -10,7 +10,7 @@ public class LookupTableEntity {
     @GeneratedValue
     private Long id;
 
-    private String city;
+    private String airport;
 
     @Column(unique = true)
     private String IATA;

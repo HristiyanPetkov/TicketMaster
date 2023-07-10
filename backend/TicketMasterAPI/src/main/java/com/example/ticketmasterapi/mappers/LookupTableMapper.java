@@ -1,8 +1,11 @@
 package com.example.ticketmasterapi.mappers;
 
+import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.dto.LookupTableResource;
 import com.example.ticketmasterapi.models.LookupTableEntity;
+import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -11,12 +14,23 @@ import java.util.List;
 public interface LookupTableMapper {
     LookupTableMapper LOOKUP_TABLE_MAPPER = Mappers.getMapper(LookupTableMapper.class);
 
-    public LookupTableResource toLookupTableResource(LookupTableEntity lookupTableEntity);
+    LookupTableResource toLookupTableResource(LookupTableEntity lookupTableEntity);
 
-    public LookupTableEntity fromLookupTableResource(LookupTableResource lookupTableResource);
+    LookupTableEntity fromLookupTableResource(LookupTableResource lookupTableResource);
 
-    public List<LookupTableResource> toLookupTableResources(List<LookupTableEntity> lookupTableEntityList);
+    List<LookupTableResource> toLookupTableResources(List<LookupTableEntity> lookupTableEntityList);
 
-    public List<LookupTableEntity> fromLookupTableResources(List<LookupTableResource> lookupTableResourceList);
+    List<LookupTableEntity> fromLookupTableResources(List<LookupTableResource> lookupTableResourceList);
 
+    @Mapping(target = "IATA", source = "flightResource.departureIATA")
+    @Mapping(target = "airport", source = "flightResource.departureAirport")
+    LookupTableEntity fromFLightResource(FlightResource flightResource);
+
+    @Mapping(target = "IATA", source = "flightDto.departure.iata")
+    @Mapping(target = "airport", source = "flightDto.departure.airport")
+    LookupTableEntity fromFLightDtoByDeparture(FlightDto flightDto);
+
+    @Mapping(target = "IATA", source = "flightDto.arrival.iata")
+    @Mapping(target = "airport", source = "flightDto.arrival.airport")
+    LookupTableEntity fromFLightDtoByArrival(FlightDto flightDto);
 }

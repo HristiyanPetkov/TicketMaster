@@ -6,6 +6,8 @@ import com.example.ticketmasterapi.services.LookupTableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.example.ticketmasterapi.mappers.LookupTableMapper.LOOKUP_TABLE_MAPPER;
 
 @Service
@@ -20,7 +22,17 @@ public class LookupTableServiceImpl implements LookupTableService {
     }
 
     @Override
-    public LookupTableResource getCity(String IATA) {
-        return LOOKUP_TABLE_MAPPER.toLookupTableResource(lookupTableRepository.getCity(IATA));
+    public String getAirport(String IATA) {
+        return lookupTableRepository.getAirport(IATA);
+    }
+
+    @Override
+    public String getIATA(String airport) {
+        return lookupTableRepository.getIATA(airport);
+    }
+
+    @Override
+    public List<String> getAirportsByPartialAirport(String partialAirport) {
+        return lookupTableRepository.getAirportsByPartialAirport(partialAirport);
     }
 }
