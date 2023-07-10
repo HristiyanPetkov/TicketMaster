@@ -4,6 +4,6 @@ export class Flight{
     public to: string,
     public arrivalDate: Date,
     public departureDate: Date,
-    public ammount: number
+    public amount: number
   ) { }
 }
