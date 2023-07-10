@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="flightsDB" uuid="2ec3d909-e7b6-4c3e-ab65-fa43d76b9c15">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/flights</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-  </component>
-</project>
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="3f85bd12-40df-4688-9d14-6f95c383ac0f">
+    <data-source source="LOCAL" name="@localhost" uuid="b8fa4c9c-e3a7-4889-b70f-1216637db7f1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

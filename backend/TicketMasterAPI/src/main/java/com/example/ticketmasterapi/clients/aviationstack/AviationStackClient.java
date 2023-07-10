@@ -42,7 +42,7 @@ public class AviationStackClient {
         return flights.data;
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    //@Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void saveFlights() {
         List<FlightDto> flightsDto = getFlights();
         List<FlightEntity> flights = FLIGHT_MAPPER.fromFlights(flightsDto);

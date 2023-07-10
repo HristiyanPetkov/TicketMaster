@@ -33,8 +33,8 @@ public class LookupTableServiceImpl implements LookupTableService {
     }
 
     @Override
-    public List<String> getAirportsByPartialAirport(String partialAirport) {
+    public List<LookupTableResource> getAirportsByPartialAirport(String partialAirport) {
         List<LookupTableEntity> lookupTableRepositoryList = lookupTableRepository.getAirportsByAirportContaining(partialAirport);
-        return LOOKUP_TABLE_MAPPER.toLookupTableResources(lookupTableRepositoryList).stream().map(LookupTableResource::getAirport).toList();
+        return LOOKUP_TABLE_MAPPER.toLookupTableResources(lookupTableRepositoryList);
     }
 }

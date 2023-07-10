@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="Added functionalities for lookup table such as getting a lsit of airports by partial airport name.">
+    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="Added lookup table and functionalities for said table.">
+      <change afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/controllers/LookupTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/LookupTableRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/LookupTableRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dto/LookupTableResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dto/LookupTableResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/LookupTableMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/LookupTableMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/models/LookupTableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/models/LookupTableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/FlightMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/FlightMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/LookupTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/LookupTableService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/FlightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/FlightServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/LookupTableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/LookupTableServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -64,6 +64,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;d6d83ef96b707a2703c450e7fee263a5&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -115,6 +116,7 @@
       <updated>1688638179705</updated>
       <workItem from="1688638181885" duration="5592000" />
       <workItem from="1688716079960" duration="13111000" />
+      <workItem from="1688987541263" duration="2471000" />
     </task>
     <task id="LOCAL-00001" summary="temporary files for now">
       <option name="closed" value="true" />
@@ -148,23 +150,7 @@
       <option name="project" value="LOCAL" />
       <updated>1688978708179</updated>
     </task>
-    <task id="LOCAL-00005" summary="Removed obsolete fields in entity layer for flight, added mappers and made the getFlight function work with IATA codes instead of straight up names.">
-      <option name="closed" value="true" />
-      <created>1688986471828</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1688986471828</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Added functionalities for lookup table such as getting a lsit of airports by partial airport name.">
-      <option name="closed" value="true" />
-      <created>1688986516173</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1688986516173</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,8 +160,17 @@
     <MESSAGE value="temporary files for now" />
     <MESSAGE value="Added add function for testing" />
     <MESSAGE value="Added lookup table and functionalities for said table." />
-    <MESSAGE value="Removed obsolete fields in entity layer for flight, added mappers and made the getFlight function work with IATA codes instead of straight up names." />
-    <MESSAGE value="Added functionalities for lookup table such as getting a lsit of airports by partial airport name." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functionalities for lookup table such as getting a lsit of airports by partial airport name." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added lookup table and functionalities for said table." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dto/FlightResource.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -67,6 +67,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Object addFlight(FlightResource flightResource) {
+        System.out.println(FLIGHT_MAPPER.fromFlightResource(flightResource));
         return FLIGHT_MAPPER.toFlightResource(flightRepository.save(FLIGHT_MAPPER.fromFlightResource(flightResource)));
     }
 

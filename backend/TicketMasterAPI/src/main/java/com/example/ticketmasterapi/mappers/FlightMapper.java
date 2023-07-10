@@ -16,6 +16,12 @@ import java.util.List;
 public interface FlightMapper {
     FlightMapper FLIGHT_MAPPER = Mappers.getMapper(FlightMapper.class);
 
+    @Mapping(target = "arrival_date", source = "flight.arrivalDate")
+    @Mapping(target = "departure_date", source = "flight.departureDate")
+    @Mapping(target = "departureAirport", source = "flight.departureIATA")
+    @Mapping(target = "arrivalAirport", source = "flight.arrivalIATA")
+    @Mapping(target = "flightNumber", source = "flight.flightNumber")
+    @Mapping(target = "price", source = "flight.price")
     FlightResource toFlightResource(FlightEntity flight);
 
     @Mapping(target = "arrivalDate", source =    "flightResource.arrival_date")

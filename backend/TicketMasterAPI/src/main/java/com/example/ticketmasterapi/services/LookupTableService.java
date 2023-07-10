@@ -1,6 +1,7 @@
 package com.example.ticketmasterapi.services;
 
 import com.example.ticketmasterapi.dto.LookupTableResource;
+import com.example.ticketmasterapi.models.LookupTableEntity;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface LookupTableService {
 
     String getIATA(String airport);
 
-    List<String> getAirportsByPartialAirport(String partialAirport);
+    public List<LookupTableResource> getAirportsByPartialAirport(String partialAirport);
 }
