@@ -4,20 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="">
+    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="Added lookup table and functionalities for said table.">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/amadeus/dto/FlightDtoAm.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/amadeus/dto/FlightDtoAm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/controllers/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/controllers/FlightController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/FlightRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/FlightRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dto/FlightResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dto/FlightResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/LookupTableRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/LookupTableRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/FlightMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/FlightMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/LookupTableMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/mappers/LookupTableMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/models/FlightEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/models/FlightEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/FlightService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/FlightService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/models/LookupTableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/models/LookupTableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/LookupTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/LookupTableService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/FlightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/FlightServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/LookupTableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/services/impl/LookupTableServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -143,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688668216385</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added lookup table and functionalities for said table.">
+      <option name="closed" value="true" />
+      <created>1688978708179</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688978708179</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +162,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="temporary files for now" />
     <MESSAGE value="Added add function for testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added add function for testing" />
+    <MESSAGE value="Added lookup table and functionalities for said table." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added lookup table and functionalities for said table." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dto/FlightResource.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

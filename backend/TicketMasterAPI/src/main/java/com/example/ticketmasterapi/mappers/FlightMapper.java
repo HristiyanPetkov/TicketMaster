@@ -20,21 +20,18 @@ public interface FlightMapper {
 
     @Mapping(target = "arrivalDate", source =    "flightResource.arrival_date")
     @Mapping(target = "departureDate", source = "flightResource.departure_date")
-    @Mapping(target = "departureAirport", source = "flightResource.departureAirport")
-    @Mapping(target = "arrivalAirport", source = "flightResource.arrivalAirport")
+    @Mapping(target = "departureIATA", source = "flightResource.departureAirport")
+    @Mapping(target = "arrivalIATA", source = "flightResource.arrivalAirport")
     @Mapping(target = "flightNumber", source = "flightResource.flightNumber")
     @Mapping(target = "price", source = "flightResource.price")
     FlightEntity fromFlightResource(FlightResource flightResource);
 
     @Mapping(target = "departureDate", source = "flightDto.departure.scheduled")
     @Mapping(target = "arrivalDate", source = "flightDto.arrival.scheduled")
-    @Mapping(target = "departureAirport", source = "flightDto.departure.airport")
-    @Mapping(target = "departureIata", source = "flightDto.departure.iata")
-    @Mapping(target = "arrivalAirport", source = "flightDto.arrival.airport")
-    @Mapping(target = "arrivalIata", source = "flightDto.arrival.iata")
+    @Mapping(target = "departureIATA", source = "flightDto.departure.iata")
+    @Mapping(target = "arrivalIATA", source = "flightDto.arrival.iata")
     @Mapping(target = "flightNumber", source = "flightDto.flight.number")
     FlightEntity fromFlight(FlightDto flightDto);
-
 
     List<FlightResource> toFlightResources(List<FlightEntity> flightList);
 
