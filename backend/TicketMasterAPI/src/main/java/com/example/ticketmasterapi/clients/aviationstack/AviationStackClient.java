@@ -1,12 +1,10 @@
 package com.example.ticketmasterapi.clients.aviationstack;
 
 import com.example.ticketmasterapi.clients.amadeus.AmadeusClient;
-import com.example.ticketmasterapi.clients.amadeus.dto.FlightDtoAm;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightsData;
 import com.example.ticketmasterapi.dao.FlightRepository;
 import com.example.ticketmasterapi.dao.LookupTableRepository;
-import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.models.FlightEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
