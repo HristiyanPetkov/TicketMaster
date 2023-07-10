@@ -55,14 +55,11 @@ public class FlightServiceImpl implements FlightService {
         if(departureDate.after(yesterday)) {
             System.out.println(1);
             List<FlightEntity> tempFLights = flightRepository.findByArrivalIATAAndDepartureIATAAndDepartureDateAfter(originIATA, destinationIATA, departureDate);   //clarity
-            List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFLights);
-            System.out.println(flights.stream().findFirst().orElse(null));
-            return flights.stream().findFirst().orElse(null);
+            return getDesiredFLight(tempFLights, origin, destination);
         } else if(arrivalDate.after(yesterday)) {
             System.out.println(2);
-            List<FlightEntity> tempFLights = flightRepository.findByArrivalIATAAndDepartureIATAAndArrivalDateAfter(originIATA, destinationIATA, arrivalDate);
-            List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFLights);
-            return flights.stream().findFirst().orElse(null);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIATAAndDepartureIATAAndArrivalDateAfter(originIATA, destinationIATA, arrivalDate);
+            return getDesiredFLight(tempFlights, origin, destination);
         }
         System.out.println(3);
         return null;
@@ -73,4 +70,14 @@ public class FlightServiceImpl implements FlightService {
         return FLIGHT_MAPPER.toFlightResource(flightRepository.save(FLIGHT_MAPPER.fromFlightResource(flightResource)));
     }
 
+    private FlightResource getDesiredFLight(List<FlightEntity> tempFlights, String origin, String destination){
+        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights);
+        System.out.println(flights.stream().findFirst().orElse(null));
+        FlightResource result = flights.stream().findFirst().orElse(null);
+        if(result != null) {
+            result.setDepartureAirport(origin);
+            result.setArrivalAirport(destination);
+        }
+        return result;
+    }
 }

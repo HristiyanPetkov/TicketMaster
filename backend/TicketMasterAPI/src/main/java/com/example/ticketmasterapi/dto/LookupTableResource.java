@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class LookupTableResource {
-    private String city;
+    private String airport;
     private String IATA;
 }

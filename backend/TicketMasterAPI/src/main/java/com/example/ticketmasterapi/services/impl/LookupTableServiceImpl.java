@@ -2,6 +2,7 @@ package com.example.ticketmasterapi.services.impl;
 
 import com.example.ticketmasterapi.dao.LookupTableRepository;
 import com.example.ticketmasterapi.dto.LookupTableResource;
+import com.example.ticketmasterapi.models.LookupTableEntity;
 import com.example.ticketmasterapi.services.LookupTableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,17 @@ public class LookupTableServiceImpl implements LookupTableService {
 
     @Override
     public String getAirport(String IATA) {
-        return lookupTableRepository.getAirport(IATA);
+        return lookupTableRepository.getLookupTableEntityByIATA(IATA).getAirport();
     }
 
     @Override
     public String getIATA(String airport) {
-        return lookupTableRepository.getIATA(airport);
+        return lookupTableRepository.getLookupTableEntityByAirport(airport).getIATA();
     }
 
     @Override
     public List<String> getAirportsByPartialAirport(String partialAirport) {
-        return lookupTableRepository.getAirportsByPartialAirport(partialAirport);
+        List<LookupTableEntity> lookupTableRepositoryList = lookupTableRepository.getAirportsByAirportContaining(partialAirport);
+        return LOOKUP_TABLE_MAPPER.toLookupTableResources(lookupTableRepositoryList).stream().map(LookupTableResource::getAirport).toList();
     }
 }

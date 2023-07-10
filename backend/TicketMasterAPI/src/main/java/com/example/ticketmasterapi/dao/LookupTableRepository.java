@@ -1,17 +1,16 @@
 package com.example.ticketmasterapi.dao;
 
 import com.example.ticketmasterapi.models.LookupTableEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface LookupTableRepository {
-    String getAirport(String IATA);
+public interface LookupTableRepository extends JpaRepository<LookupTableEntity, Long> {
+    LookupTableEntity getLookupTableEntityByIATA(String IATA);
 
-    String getIATA(String airport);
+    LookupTableEntity getLookupTableEntityByAirport(String airport);
 
-    LookupTableEntity save(LookupTableEntity lookupTableEntity);
-
-    List<String> getAirportsByPartialAirport(String partialAirport);
+    List<LookupTableEntity> getAirportsByAirportContaining(String partialAirport);
 }

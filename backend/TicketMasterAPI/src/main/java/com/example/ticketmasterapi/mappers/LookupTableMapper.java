@@ -22,10 +22,6 @@ public interface LookupTableMapper {
 
     List<LookupTableEntity> fromLookupTableResources(List<LookupTableResource> lookupTableResourceList);
 
-    @Mapping(target = "IATA", source = "flightResource.departureIATA")
-    @Mapping(target = "airport", source = "flightResource.departureAirport")
-    LookupTableEntity fromFLightResource(FlightResource flightResource);
-
     @Mapping(target = "IATA", source = "flightDto.departure.iata")
     @Mapping(target = "airport", source = "flightDto.departure.airport")
     LookupTableEntity fromFLightDtoByDeparture(FlightDto flightDto);
