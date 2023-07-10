@@ -26,7 +26,8 @@ public interface FlightMapper {
     @Mapping(target = "price", source = "flightResource.price")
     FlightEntity fromFlightResource(FlightResource flightResource);
 
-    @Mapping(target = "departureDate", source = "flightDto.flight_date")
+    @Mapping(target = "departureDate", source = "flightDto.departure.scheduled")
+    @Mapping(target = "arrivalDate", source = "flightDto.arrival.scheduled")
     @Mapping(target = "departureAirport", source = "flightDto.departure.airport")
     @Mapping(target = "departureIata", source = "flightDto.departure.iata")
     @Mapping(target = "arrivalAirport", source = "flightDto.arrival.airport")
