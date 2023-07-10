@@ -51,10 +51,10 @@ public class AviationStackClient {
 
     public void addAirports(List<FlightDto> flights){
         for(FlightDto flightDto : flights) {
-            if(lookupTableRepository.notExistsByAirportAndIATA(flightDto.departure.airport, flightDto.departure.iata))
+            if(!lookupTableRepository.existsByAirportAndIATA(flightDto.departure.airport, flightDto.departure.iata))
                 lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByDeparture(flightDto));
 
-            if(lookupTableRepository.notExistsByAirportAndIATA(flightDto.arrival.airport, flightDto.arrival.iata))
+            if(!lookupTableRepository.existsByAirportAndIATA(flightDto.arrival.airport, flightDto.arrival.iata))
                 lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByArrival(flightDto));
         }
     }
