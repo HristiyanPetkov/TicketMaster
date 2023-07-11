@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="Limited autocomplete responses to 10">
+    <list default="true" id="8d6e89fa-cb4e-4efd-9976-7106e1b65731" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/clients/aviationstack/AviationStackClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/LookupTableRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/LookupTableRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/controllers/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/controllers/FlightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/FlightRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/TicketMasterAPI/src/main/java/com/example/ticketmasterapi/dao/FlightRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +110,7 @@
       <updated>1688638179705</updated>
       <workItem from="1688638181885" duration="5592000" />
       <workItem from="1688716079960" duration="13111000" />
-      <workItem from="1688987541263" duration="7637000" />
+      <workItem from="1688987541263" duration="14308000" />
     </task>
     <task id="LOCAL-00001" summary="temporary files for now">
       <option name="closed" value="true" />
@@ -160,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688994796287</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed check for duplicate IATAs">
+      <option name="closed" value="true" />
+      <created>1688998813767</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1688998813767</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,7 +180,8 @@
     <MESSAGE value="Added lookup table and functionalities for said table." />
     <MESSAGE value="Lookup table requests" />
     <MESSAGE value="Limited autocomplete responses to 10" />
-    <option name="LAST_COMMIT_MESSAGE" value="Limited autocomplete responses to 10" />
+    <MESSAGE value="Fixed check for duplicate IATAs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed check for duplicate IATAs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
