@@ -5,6 +5,7 @@ import com.example.ticketmasterapi.clients.aviationstack.dto.FlightsData;
 import com.example.ticketmasterapi.clients.skyscanner.SkyscannerClient;
 import com.example.ticketmasterapi.clients.skyscanner.dto.FlightDtoSc;
 import com.example.ticketmasterapi.dao.FlightRepository;
+import com.example.ticketmasterapi.dao.LookupTableRepository;
 import com.example.ticketmasterapi.models.FlightEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +17,14 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
+import static com.example.ticketmasterapi.mappers.LookupTableMapper.LOOKUP_TABLE_MAPPER;
 
 @Service
 @RequiredArgsConstructor
 public class AviationStackClient {
     private final FlightRepository flightRepository;
+
+    private final LookupTableRepository lookupTableRepository;
 
     private final WebClient webClient;
 
@@ -55,7 +59,18 @@ public class AviationStackClient {
         }
 
         flightRepository.saveAll(flights);
+        addAirports(flightsDto);
 
         System.out.println("Saved flights!");
+    }
+
+    public void addAirports(List<FlightDto> flights){
+        for(FlightDto flightDto : flights) {
+            if(!lookupTableRepository.existsByAirportAndIATA(flightDto.departure.airport, flightDto.departure.iata))
+                lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByDeparture(flightDto));
+
+            if(!lookupTableRepository.existsByAirportAndIATA(flightDto.arrival.airport, flightDto.arrival.iata))
+                lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByArrival(flightDto));
+        }
     }
 }
