@@ -47,8 +47,8 @@ public class AviationStackClient {
         List<FlightEntity> flights = FLIGHT_MAPPER.fromFlights(flightsDto);
 
         for (FlightEntity flight : flights) {
-            String origin = flight.getDepartureIata();
-            String destination = flight.getArrivalIata();
+            String origin = flight.getDepartureIATA();
+            String destination = flight.getArrivalIATA();
             String date = flight.getDepartureDate().toString();
             Collection<FlightDtoSc> response = skyscannerClient.getFlightsPrice(origin, destination, date);
             if (response.isEmpty()) {
