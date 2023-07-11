@@ -1,8 +1,5 @@
 package com.example.ticketmasterapi.mappers;
 
-import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
-import com.example.ticketmasterapi.clients.amadeus.dto.FlightDtoAm;
-import com.example.ticketmasterapi.clients.aviationstack.dto.Flight;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.models.FlightEntity;
@@ -33,6 +30,7 @@ public interface FlightMapper {
     @Mapping(target = "arrivalAirport", source = "flightDto.arrival.airport")
     @Mapping(target = "arrivalIata", source = "flightDto.arrival.iata")
     @Mapping(target = "flightNumber", source = "flightDto.flight.number")
+    @Mapping(target = "airline", source = "flightDto.airline.name")
     FlightEntity fromFlight(FlightDto flightDto);
 
 

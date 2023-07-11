@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FlightDto {
     public Flight flight;
+    public Airline airline;
     public Airport departure;
     public Airport arrival;
 }

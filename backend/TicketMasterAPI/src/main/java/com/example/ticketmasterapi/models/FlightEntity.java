@@ -21,6 +21,7 @@ public class FlightEntity {
     private String arrivalAirport;
     private String departureIata;
     private String arrivalIata;
+    private String airline;
     private Float price;
     private Integer seats;
 }
