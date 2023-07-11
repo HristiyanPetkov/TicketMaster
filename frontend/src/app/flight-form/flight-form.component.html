@@ -1,17 +1,19 @@
-<form (ngSubmit)="get()" class="max-w-6xl mx-auto bg-blue-900 p-8 rounded shadow-lg">
+<form (ngSubmit)="get()" class="box max-w-6xl mx-auto bg-deep_blue p-8 rounded shadow-lg">
   <div class="relative">
     <label for="from" class="text-white text-4xl font-bold mb-2">From</label>
     <input type="text" id="from" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="fromTerm" (input)="searchFrom()" [ngModelOptions]="{ standalone: true }" placeholder="Enter From">
-    <ul *ngIf="fromResults.length > 0" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
+    <ul *ngIf="fromResults.length > 0 && fromTerm && showFromResults" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
       <li *ngFor="let result of fromResults" class="cursor-pointer px-4 py-3 text-3xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectFrom(result)">{{ result.airport }} ({{ result.iata }})</li>
     </ul>
+    <p *ngIf="fromTerm && fromResults.length === 0" class="text-white text-lg mt-2">No flights found for this location.</p>
   </div>
-  <div class="relative mt-6">
-    <label for="to" class="text-white text-4xl font-bold mb-2">To</label>
+  <div class="relative">
+    <label for="to" class="text-white text-4xl font-bold mb-2 mt-6">To</label>
     <input type="text" id="to" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="toTerm" (input)="searchTo()" [ngModelOptions]="{ standalone: true }" placeholder="Enter To">
-    <ul *ngIf="toResults.length > 0" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
-      <li *ngFor="let result of toResults" class="cursor-pointer px-4 py-3 text-xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectTo(result)">{{ result.airport }} ({{ result.iata }})</li>
+    <ul *ngIf="toResults.length > 0 && toTerm && showToResults" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
+      <li *ngFor="let result of toResults" class="cursor-pointer px-4 py-3 text-3xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectTo(result)">{{ result.airport }} ({{ result.iata }})</li>
     </ul>
+    <p *ngIf="toTerm && toResults.length === 0" class="text-white text-lg mt-2">No flights found for this location.</p>
   </div>
   <div class="w-full mt-6">
     <label for="tickets" class="text-white text-4xl font-bold mb-2">Number of Tickets</label>

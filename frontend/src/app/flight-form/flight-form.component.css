@@ -3,3 +3,9 @@ button {
   background-color: gray !important;
   border-color: gray !important;
 }
+
+.box {
+  backdrop-filter: blur(8px);
+  /*make the background a gray color*/
+  background-color: rgba(64, 61, 61, 0.455);
+}

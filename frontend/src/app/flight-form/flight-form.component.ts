@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Flight } from '../../flight';
 import { FlightServiceService } from '../flight-service.service';
 import { Result } from 'src/result';
@@ -19,9 +19,11 @@ export class FlightFormComponent {
   public showDeparture: boolean = true;
   fromTerm: string = '';
   fromResults: Airport[] = [];
+  showFromResults: boolean = true;
 
   toTerm: string = '';
   toResults: Airport[] = [];
+  showToResults: boolean = true;
 
   fromIATA: string = '';
   toIATA: string = '';
@@ -55,6 +57,7 @@ export class FlightFormComponent {
   }
 
   searchFrom(): void {
+    this.toggleAutocompleteFrom()
     const params = new HttpParams()
       .set('search', this.fromTerm);
 
@@ -69,6 +72,7 @@ export class FlightFormComponent {
   }
 
   searchTo(): void {
+    this.toggleAutocompleteTo()
     const params = new HttpParams()
       .set('search', this.toTerm);
 
@@ -85,12 +89,39 @@ export class FlightFormComponent {
   selectFrom(result: Airport): void {
     this.fromTerm = result.airport;
     this.fromIATA = result.iata;
-    this.fromResults = [];
+    this.fromResults = <Airport[]><unknown>result;
   }
 
   selectTo(result: Airport): void {
     this.toTerm = result.airport;
     this.toIATA = result.iata;
-    this.toResults = [];
+    this.toResults = <Airport[]><unknown>result;
+  }
+
+  toggleAutocompleteFrom() {
+    this.showFromResults = true;
+  }
+
+  toggleAutocompleteTo() {
+    this.showToResults = true;
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClickOutside(target: any) {
+    const fromInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+    if (!fromInput) {
+      return;
+    }
+    if (!fromInput.contains(target)) {
+      this.showFromResults = false;
+    }
+
+    if (!toInput) {
+      return;
+    }
+    if (!toInput.contains(target)) {
+      this.showToResults = false;
+    }
   }
 }
