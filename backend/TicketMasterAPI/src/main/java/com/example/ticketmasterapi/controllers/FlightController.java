@@ -29,9 +29,19 @@ public class FlightController {
         return ResponseEntity.ok(flightService.getFlight(departureAirport, arrivalAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
     }
 
+    @GetMapping("/getFlights")
+    public ResponseEntity<?> getFlights(@RequestParam String arrivalAirport, @RequestParam String departureAirport, @RequestParam String arrival_date, @RequestParam String departure_date) {
+        return ResponseEntity.ok(flightService.getFlights(departureAirport, arrivalAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
+    }
+
     @GetMapping("/getCheapestDirect")
     public ResponseEntity<?> getCheapestDirectFlight(@RequestParam String arrivalAirport, @RequestParam String departureAirport, @RequestParam String arrival_date, @RequestParam String departure_date) {
         return ResponseEntity.ok(flightService.getCheapestDirectFlight(departureAirport, arrivalAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
+    }
+
+    @GetMapping("/getCheapestDirectFlights")
+    public ResponseEntity<?> getCheapestDirectFlights(@RequestParam String arrivalAirport, @RequestParam String departureAirport, @RequestParam String arrival_date, @RequestParam String departure_date) {
+        return ResponseEntity.ok(flightService.getCheapestDirectFlights(departureAirport, arrivalAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
     }
 
     @PostMapping("/add")

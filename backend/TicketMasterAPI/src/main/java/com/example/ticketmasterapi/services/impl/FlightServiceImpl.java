@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
 
@@ -51,11 +52,11 @@ public class FlightServiceImpl implements FlightService {
         Timestamp currentDate = new Timestamp(System.currentTimeMillis());
         long yesterdayInMillis = currentDate.getTime() - (24 * 60 * 60 * 1000);
         Timestamp yesterday = new Timestamp(yesterdayInMillis);
-        String originIATA = lookupTableService.getIATA(origin);     //we are gonan work with IATA codes on entity and airport name on resource layer. this simply converts the airport name to IATA code.
+        String originIATA = lookupTableService.getIATA(origin);
         String destinationIATA = lookupTableService.getIATA(destination);
         if(departureDate.after(yesterday)) {
             System.out.println(1);
-            List<FlightEntity> tempFLights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(originIATA, destinationIATA, departureDate);   //clarity
+            List<FlightEntity> tempFLights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(originIATA, destinationIATA, departureDate);
             return getDesiredFLight(tempFLights, origin, destination);
         } else if(arrivalDate.after(yesterday)) {
             System.out.println(2);
@@ -92,9 +93,48 @@ public class FlightServiceImpl implements FlightService {
         return FLIGHT_MAPPER.toFlightResource(flightRepository.save(FLIGHT_MAPPER.fromFlightResource(flightResource)));
     }
 
+    @Override
+    public List<FlightResource> getFlights(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate) {
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        long yesterdayInMillis = currentDate.getTime() - (24 * 60 * 60 * 1000);
+        Timestamp yesterday = new Timestamp(yesterdayInMillis);
+        String originIATA = lookupTableService.getIATA(origin);
+        String destinationIATA = lookupTableService.getIATA(destination);
+        if(departureDate.after(yesterday)) {
+            System.out.println(1);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(originIATA, destinationIATA, departureDate);
+            return getDesiredFlights(tempFlights, origin, destination);
+        } else if(arrivalDate.after(yesterday)) {
+            System.out.println(2);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndArrivalDateAfter(originIATA, destinationIATA, arrivalDate);
+            return getDesiredFlights(tempFlights, origin, destination);
+        }
+        System.out.println(3);
+        return null;
+    }
+
+    @Override
+    public List<FlightResource> getCheapestDirectFlights(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate) {
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        long yesterdayInMillis = currentDate.getTime() - (24 * 60 * 60 * 1000);
+        Timestamp yesterday = new Timestamp(yesterdayInMillis);
+        String originIATA = lookupTableService.getIATA(origin);
+        String destinationIATA = lookupTableService.getIATA(destination);
+        if(departureDate.after(yesterday)) {
+            System.out.println(1);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(originIATA, destinationIATA, departureDate);
+            return getDesiredCheapestDirectFlights(tempFlights, origin, destination);
+        } else if(arrivalDate.after(yesterday)) {
+            System.out.println(2);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndArrivalDateAfter(originIATA, destinationIATA, arrivalDate);
+            return getDesiredCheapestDirectFlights(tempFlights, origin, destination);
+        }
+        System.out.println(3);
+        return null;
+    }
+
     private FlightResource getDesiredFLight(List<FlightEntity> tempFlights, String origin, String destination){
         List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights);
-        System.out.println(flights.stream().findFirst().orElse(null));
         FlightResource result = flights.stream().findFirst().orElse(null);
         if(result != null) {
             result.setDepartureAirport(origin);
@@ -105,12 +145,29 @@ public class FlightServiceImpl implements FlightService {
 
     private FlightResource getDesiredCheapestDirectFlight(List<FlightEntity> tempFlights, String origin, String destination){
         List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights);
-        System.out.println(flights.stream().findFirst().orElse(null));
         FlightResource result = flights.stream().min(Comparator.comparing(FlightResource::getPrice)).orElse(null);
         if(result != null) {
             result.setDepartureAirport(origin);
             result.setArrivalAirport(destination);
         }
         return result;
+    }
+
+    private List<FlightResource> getDesiredFlights(List<FlightEntity> tempFlights, String origin, String destination){
+        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights).stream().limit(5).collect(Collectors.toList());
+        flights.forEach(flightResource -> {
+            flightResource.setDepartureAirport(origin);
+            flightResource.setArrivalAirport(destination);
+        });
+        return flights;
+    }
+
+    private List<FlightResource> getDesiredCheapestDirectFlights(List<FlightEntity> tempFlights, String origin, String destination){
+        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights).stream().sorted(Comparator.comparing(FlightResource::getPrice)).limit(5).collect(Collectors.toList());
+        flights.forEach(flightResource -> {
+            flightResource.setDepartureAirport(origin);
+            flightResource.setArrivalAirport(destination);
+        });
+        return flights;
     }
 }
