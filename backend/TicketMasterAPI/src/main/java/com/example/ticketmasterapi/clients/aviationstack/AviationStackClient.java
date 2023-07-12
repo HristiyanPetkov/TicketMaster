@@ -58,14 +58,13 @@ public class AviationStackClient {
             flight.setPrice(response.iterator().next().minPrice.amount);
             //System.out.println(response);
         }
-
-        flightRepository.saveAll(flights);
+        flightRepository.saveAll(removeIncompleteFlights(flights));
         addAirports(flightsDto);
 
         System.out.println("Saved flights!");
     }
 
-    public void addAirports(List<FlightDto> flights){
+    private void addAirports(List<FlightDto> flights){
         for(FlightDto flightDto : flights) {
             if(!lookupTableRepository.existsByAirportAndIATA(flightDto.departure.airport, flightDto.departure.iata))
                 lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByDeparture(flightDto));
@@ -73,5 +72,10 @@ public class AviationStackClient {
             if(!lookupTableRepository.existsByAirportAndIATA(flightDto.arrival.airport, flightDto.arrival.iata))
                 lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByArrival(flightDto));
         }
+    }
+
+    private List<FlightEntity> removeIncompleteFlights(List<FlightEntity> flights) {
+        flights.removeIf(flight -> flight.getDepartureIata() == null || flight.getArrivalIata() == null || flight.getPrice() == null);
+        return flights;
     }
 }
