@@ -12,5 +12,7 @@ public interface FlightService {
     void delete(Long id);
     FlightResource getFlight(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate);
 
+    FlightResource getCheapestDirectFlight(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate);
+
     Object addFlight(FlightResource flightResource);
 }

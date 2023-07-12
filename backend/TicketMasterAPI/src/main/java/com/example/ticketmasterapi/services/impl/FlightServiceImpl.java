@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
@@ -66,6 +67,26 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public FlightResource getCheapestDirectFlight(String origin, String destination, Timestamp departureDate, Timestamp arrivalDate) {
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        long yesterdayInMillis = currentDate.getTime() - (24 * 60 * 60 * 1000);
+        Timestamp yesterday = new Timestamp(yesterdayInMillis);
+        String originIATA = lookupTableService.getIATA(origin);     //we are gonan work with IATA codes on entity and airport name on resource layer. this simply converts the airport name to IATA code.
+        String destinationIATA = lookupTableService.getIATA(destination);
+        if(departureDate.after(yesterday)) {
+            System.out.println(1);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(originIATA, destinationIATA, departureDate);   //clarity
+            return getDesiredCheapestDirectFlight(tempFlights, origin, destination);
+        } else if(arrivalDate.after(yesterday)) {
+            System.out.println(2);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndArrivalDateAfter(originIATA, destinationIATA, arrivalDate);
+            return getDesiredCheapestDirectFlight(tempFlights, origin, destination);
+        }
+        System.out.println(3);
+        return null;
+    }
+
+    @Override
     public Object addFlight(FlightResource flightResource) {
         System.out.println(FLIGHT_MAPPER.fromFlightResource(flightResource));
         return FLIGHT_MAPPER.toFlightResource(flightRepository.save(FLIGHT_MAPPER.fromFlightResource(flightResource)));
@@ -75,6 +96,17 @@ public class FlightServiceImpl implements FlightService {
         List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights);
         System.out.println(flights.stream().findFirst().orElse(null));
         FlightResource result = flights.stream().findFirst().orElse(null);
+        if(result != null) {
+            result.setDepartureAirport(origin);
+            result.setArrivalAirport(destination);
+        }
+        return result;
+    }
+
+    private FlightResource getDesiredCheapestDirectFlight(List<FlightEntity> tempFlights, String origin, String destination){
+        List<FlightResource> flights = FLIGHT_MAPPER.toFlightResources(tempFlights);
+        System.out.println(flights.stream().findFirst().orElse(null));
+        FlightResource result = flights.stream().min(Comparator.comparing(FlightResource::getPrice)).orElse(null);
         if(result != null) {
             result.setDepartureAirport(origin);
             result.setArrivalAirport(destination);

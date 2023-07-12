@@ -29,11 +29,11 @@ public class FlightController {
         return ResponseEntity.ok(flightService.getFlight(departureAirport, arrivalAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
     }
 
-//    @GetMapping("/getCheapestDirect")
-//    public ResponseEntity<?> getCheapestDirectFlight(@RequestBody FlightResource flightResource) {
-//        return ResponseEntity.ok(flightService.getCheapestDirectFlight(flightResource.getArrival(), flightResource.getDeparture(), flightResource.getDate()));
-//    }
-//
+    @GetMapping("/getCheapestDirect")
+    public ResponseEntity<?> getCheapestDirectFlight(@RequestParam String arrivalAirport, @RequestParam String departureAirport, @RequestParam String arrival_date, @RequestParam String departure_date) {
+        return ResponseEntity.ok(flightService.getCheapestDirectFlight(departureAirport, arrivalAirport, Timestamp.valueOf(departure_date.replaceAll("[a-zA-Z]", " ")), Timestamp.valueOf(arrival_date.replaceAll("[a-zA-Z]", " "))));
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addFlight(@RequestBody FlightResource flightResource) {
         System.out.println(flightResource);
