@@ -38,6 +38,7 @@ public class AviationStackClient {
                 .retrieve()
                 .bodyToMono(FlightsData.class)
                 .block();
+        assert flights != null;
         return flights.data;
     }
 
@@ -47,8 +48,8 @@ public class AviationStackClient {
         List<FlightEntity> flights = FLIGHT_MAPPER.fromFlights(flightsDto);
 
         for (FlightEntity flight : flights) {
-            String origin = flight.getDepartureIATA();
-            String destination = flight.getArrivalIATA();
+            String origin = flight.getDepartureIata();
+            String destination = flight.getArrivalIata();
             String date = flight.getDepartureDate().toString();
             Collection<FlightDtoSc> response = skyscannerClient.getFlightsPrice(origin, destination, date);
             if (response.isEmpty()) {

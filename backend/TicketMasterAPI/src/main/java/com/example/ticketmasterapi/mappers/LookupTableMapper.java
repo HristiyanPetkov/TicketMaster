@@ -1,6 +1,5 @@
 package com.example.ticketmasterapi.mappers;
 
-import com.example.ticketmasterapi.dto.FlightResource;
 import com.example.ticketmasterapi.dto.LookupTableResource;
 import com.example.ticketmasterapi.models.LookupTableEntity;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
