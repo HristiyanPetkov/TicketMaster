@@ -1,7 +1,7 @@
 package com.example.ticketmasterapi.clients.skyscanner;
 
 import com.example.ticketmasterapi.clients.skyscanner.dto.Data;
-import com.example.ticketmasterapi.clients.skyscanner.dto.FlightDtoSc;
+import com.example.ticketmasterapi.clients.skyscanner.dto.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -23,7 +22,7 @@ public class SkyscannerClient {
     @Value("${skyscanner.key}")
     private String key;
 
-    public Collection<FlightDtoSc> getFlightsPrice(String origin, String destination, String date) {
+    public Result getFlightsPrice(String origin, String destination, String date) {
         String originIata = "\"" + origin + "\"";
         String destinationIata = "\"" + destination + "\"";
 
@@ -47,6 +46,6 @@ public class SkyscannerClient {
                 .block();
 
         assert data != null;
-        return data.content.results.quotes.values();
+        return data.content.results;
     }
 }

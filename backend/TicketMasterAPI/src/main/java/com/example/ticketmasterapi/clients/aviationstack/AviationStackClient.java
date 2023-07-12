@@ -3,11 +3,15 @@ package com.example.ticketmasterapi.clients.aviationstack;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightDto;
 import com.example.ticketmasterapi.clients.aviationstack.dto.FlightsData;
 import com.example.ticketmasterapi.clients.skyscanner.SkyscannerClient;
+import com.example.ticketmasterapi.clients.skyscanner.dto.Carrier;
 import com.example.ticketmasterapi.clients.skyscanner.dto.FlightDtoSc;
+import com.example.ticketmasterapi.clients.skyscanner.dto.Result;
 import com.example.ticketmasterapi.dao.FlightRepository;
 import com.example.ticketmasterapi.dao.LookupTableRepository;
 import com.example.ticketmasterapi.models.FlightEntity;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -38,6 +42,7 @@ public class AviationStackClient {
                 .retrieve()
                 .bodyToMono(FlightsData.class)
                 .block();
+
         assert flights != null;
         return flights.data;
     }
@@ -51,13 +56,29 @@ public class AviationStackClient {
             String origin = flight.getDepartureIata();
             String destination = flight.getArrivalIata();
             String date = flight.getDepartureDate().toString();
-            Collection<FlightDtoSc> response = skyscannerClient.getFlightsPrice(origin, destination, date);
-            if (response.isEmpty()) {
+            Result result = skyscannerClient.getFlightsPrice(origin, destination, date);
+            Collection<FlightDtoSc> flightsPrices = result.quotes.values();
+            if (flightsPrices.isEmpty()) {
                 continue;
             }
-            flight.setPrice(response.iterator().next().minPrice.amount);
-            //System.out.println(response);
+
+            for (Carrier carrier : result.carriers.values()) {
+                if (carrier.name.equals(flight.getAirline())) {
+                    for (FlightDtoSc flightDto : flightsPrices) {
+                        BidiMap<String, Carrier> carriers = new DualHashBidiMap<>(result.carriers);
+                        if (flightDto.outboundLeg.marketingCarrierId.equals(carriers.getKey(carrier))) {
+                            flight.setPrice(flightDto.minPrice.amount);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (flight.getPrice() == null) {
+                flight.setPrice(1F);
+            }
         }
+
         flightRepository.saveAll(removeIncompleteFlights(flights));
         addAirports(flightsDto);
 
