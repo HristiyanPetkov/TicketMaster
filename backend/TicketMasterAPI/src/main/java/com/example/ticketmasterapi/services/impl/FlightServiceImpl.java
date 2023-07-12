@@ -75,11 +75,11 @@ public class FlightServiceImpl implements FlightService {
         String destinationIATA = lookupTableService.getIATA(destination);
         if(departureDate.after(yesterday)) {
             System.out.println(1);
-            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(originIATA, destinationIATA, departureDate);   //clarity
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndDepartureDateAfter(destinationIATA, originIATA, departureDate);   //clarity
             return getDesiredCheapestDirectFlight(tempFlights, origin, destination);
         } else if(arrivalDate.after(yesterday)) {
             System.out.println(2);
-            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndArrivalDateAfter(originIATA, destinationIATA, arrivalDate);
+            List<FlightEntity> tempFlights = flightRepository.findByArrivalIataAndDepartureIataAndArrivalDateAfter(destinationIATA, originIATA, arrivalDate);
             return getDesiredCheapestDirectFlight(tempFlights, origin, destination);
         }
         System.out.println(3);
