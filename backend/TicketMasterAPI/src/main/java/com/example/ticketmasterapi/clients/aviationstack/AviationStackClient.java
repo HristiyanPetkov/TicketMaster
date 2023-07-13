@@ -17,7 +17,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.ticketmasterapi.mappers.FlightMapper.FLIGHT_MAPPER;
@@ -73,11 +75,16 @@ public class AviationStackClient {
                     }
                 }
             }
-
-            if (flight.getPrice() == null) {
-                flight.setPrice(1F);
-            }
         }
+
+
+        Date currentDate = new Date(System.currentTimeMillis());
+        Timestamp currentTimestamp = new Timestamp(currentDate.getTime());
+        Timestamp tomorrowTimestamp = new Timestamp(currentDate.getTime() + 86400000);
+
+        flights.add(new FlightEntity(101L, "10000", currentTimestamp , tomorrowTimestamp, "SOF", "VAR", "British Airways", 10000f));
+        flights.add(new FlightEntity(102L, "10001", currentTimestamp , tomorrowTimestamp, "SOF", "VAR", "Qatar Airways", 9000f));
+        flights.add(new FlightEntity(103L, "10001", currentTimestamp , tomorrowTimestamp, "VAR", "BKK", "Qatar Airways", 9000f));
 
         flightRepository.saveAll(removeIncompleteFlights(flights));
         addAirports(flightsDto);
