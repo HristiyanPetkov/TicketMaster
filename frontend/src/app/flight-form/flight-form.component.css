@@ -10,3 +10,6 @@ button {
   background-color: rgba(64, 61, 61, 0.455);
 }
 
+.label-text {
+  font-weight: normal;
+}

@@ -1,24 +1,17 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TicketMaster</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<h2 class="text-7xl mb-16 text-center text-white mt-16">Results</h2>
+<h2 class="text-7xl mb-12 text-center text-white mt-10">Results</h2>
 
 <div class="flex justify-center">
-  <div class="box_box text-white p-8 rounded shadow-lg">
-    <h2 class="text-4xl font-bold mb-4">{{ results[0].airline }}</h2>
-    <p class="text-2xl">Departure airport: {{ results[0].departureAirport }}</p>
-    <p class="text-2xl">Arrival airport: {{ results[0].arrivalAirport }}</p>
-    <p class="text-2xl">Departure date: {{ results[0].departureDate.toLocaleString() }}</p>
-    <p class="text-2xl">Arrival date: {{ results[0].arrivalDate.toLocaleString() }}</p>
-    <p class="text-2xl">Amount: {{ results[0].amount }}</p>
-    <p class="text-2xl">Cost: {{ results[0].cost }}</p>
-    <p class="text-2xl">IATA: {{ results[0].iata }}</p>
-    <p class="text-2xl">Stops: {{ results[0].stops.join(', ') }}</p>
-    <p class="text-2xl">Flight Number: {{ results[0].flight_number }}</p>
+  <div class="box_box text-white p-8 rounded shadow-lg main-result">
+    <h2 class="text-6xl font-bold mb-6">{{ results[0].airline }}</h2>
+    <p class="text-4xl">Departure airport: {{ results[0].departureAirport }}</p>
+    <p class="text-4xl">Arrival airport: {{ results[0].arrivalAirport }}</p>
+    <p class="text-4xl">Departure date: {{ results[0].departureDate.toLocaleString() }}</p>
+    <p class="text-4xl">Arrival date: {{ results[0].arrivalDate.toLocaleString() }}</p>
+    <p class="text-4xl">Amount: {{ results[0].amount }}</p>
+    <p class="text-4xl">Cost: {{ results[0].cost }}</p>
+    <p class="text-4xl">IATA: {{ results[0].iata }}</p>
+    <p class="text-4xl">Stops: {{ results[0].stops.join(', ') }}</p>
+    <p class="text-4xl">Flight Number: {{ results[0].flight_number }}</p>
   </div>
 </div>
 
@@ -29,25 +22,32 @@
 </div>
 
 <div class="mt-8 big_box" *ngIf="showMore">
-  <div class="scrollbar">
-    <div class="scrollbar-thumb"></div>
-  </div>
   <div class="box-container">
     <ng-container *ngFor="let flight of results.slice(1)">
-      <div class="box_box text-white p-8 rounded shadow-lg" (click)="toggleFlightDetails(flight)" [class.expanded]="flight.showFlightDetails">
-        <h3 class="text-4xl font-bold mb-4">{{ flight.airline }}</h3>
-        <p class="text-2xl text-center">Departure airport: {{ flight.departureAirport }}</p>
-        <p class="text-2xl text-center">Arrival airport: {{ flight.arrivalAirport }}</p>
-        <p class="text-2xl text-center">Departure date: {{ flight.departureDate.toLocaleString() }}</p>
-        <p class="text-2xl text-center">Arrival date: {{ flight.arrivalDate.toLocaleString() }}</p>
-        <p class="text-2xl text-center">Cost: {{ flight.cost }}</p>
-        <div *ngIf="flight.showFlightDetails">
-          <p class="text-2xl">Amount: {{ flight.amount }}</p>
-          <p class="text-2xl">IATA: {{ flight.iata }}</p>
-          <p class="text-2xl">Stops: {{ flight.stops.join(', ') }}</p>
-          <p class="text-2xl">Flight Number: {{ flight.flight_number }}</p>
+      <div class="box_box text-white p-8 rounded" [class.expanded]="flight.showFlightDetails">
+        <h3 class="text-4xl font-bold mb-4 text-center">{{ flight.airline }}</h3>
+        <div class="text-3xl">
+          <p>Departure airport: {{ flight.departureAirport }}</p>
+          <p>Arrival airport: {{ flight.arrivalAirport }}</p>
+          <p>Departure date: {{ flight.departureDate.toLocaleString() }}</p>
+          <p>Arrival date: {{ flight.arrivalDate.toLocaleString() }}</p>
+          <p>Cost: {{ flight.cost }}</p>
+          <div *ngIf="flight.showFlightDetails">
+            <p>Amount: {{ flight.amount }}</p>
+            <p>IATA: {{ flight.iata }}</p>
+            <p>Stops: {{ flight.stops.join(', ') }}</p>
+            <p>Flight Number: {{ flight.flight_number }}</p>
+          </div>
+        </div>
+        <div class="button-row">
+          <button class="toggle-button text-white font-bold rounded-full p-3 mt-8 full-width-button" (click)="toggleFlightDetails(flight)">
+            <span class="toggle-icon" [class.up]="flight.showFlightDetails"></span>
+          </button>
         </div>
       </div>
     </ng-container>
   </div>
 </div>
+
+
+

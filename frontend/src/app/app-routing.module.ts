@@ -6,7 +6,8 @@ import { ResultsComponent } from './results/results.component';
 const routes: Routes = [
   { path: '', redirectTo: '/flights', pathMatch: 'full' },
   { path: 'flights', component: FlightsComponent },
-  { path: 'results', component: ResultsComponent }
+  { path: 'results', component: ResultsComponent },
+  // {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({

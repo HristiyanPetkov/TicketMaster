@@ -1,34 +1,18 @@
+.main-result {
+  width: 70%;
+  font-size: 2.5rem;
+}
+
 .big_box {
   position: relative;
-  overflow-y: scroll;
   max-height: 500px; /* Adjust the max height as needed */
 }
 
 .box_box {
   backdrop-filter: blur(8px);
-  /* Make the background a gray color */
   background-color: rgba(64, 61, 61, 0.455);
-}
-
-.scrollbar {
-  width: 10px;
-  background-color: #f1f1f1;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.big_box:hover .scrollbar {
-  opacity: 1;
-}
-
-.scrollbar-thumb {
-  background-color: #888;
-  border-radius: 5px;
+  max-width: 500px; /* Add max-width to limit the box width */
+  margin: 0 auto; /* Center the box horizontally */
 }
 
 .box {
@@ -48,6 +32,40 @@
 .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 8px;
+  gap: 50px;
   align-items: start;
+  justify-items: center; /* Center the boxes horizontally */
+  margin: 0 auto; /* Center the boxes horizontally */
+}
+
+.toggle-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-icon {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  border-top: 0.25em solid white;
+  border-right: 0.25em solid white;
+  transform: translateY(-0.2em) rotate(135deg);
+  transition: transform 0.3s;
+}
+
+.toggle-icon.up {
+  transform: translateY(0.2em) rotate(-45deg);
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.full-width-button {
+  flex-grow: 1;
+  margin-left: 1rem;
 }
