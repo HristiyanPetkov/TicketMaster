@@ -18,14 +18,14 @@ export class FlightServiceService {
 
   }
 
-  public get(flight: Flight): Observable<Result> {
+  public get(flight: Flight): Observable<Result[]> {
     const params = new HttpParams()
       .set('arrivalAirport', flight.to)
       .set('departureAirport', flight.from)
       .set('arrival_date', new Date(flight.arrivalDate).toISOString())
       .set('departure_date', new Date(flight.departureDate).toISOString());
 
-    return this.http.get<Result>(this.flightUrl + 'get', { params: params });
+    return this.http.get<Result[]>(this.flightUrl + 'get', { params: params });
   }
 
   public getSuggestions(query: string): Observable<string[]> {

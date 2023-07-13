@@ -6,8 +6,10 @@ export class Result {
     public arrivalDate: Date,
     public amount: number,
     public cost: number,
-    public iota: string,
+    public iata: string,
     public stops: string[],
-    public flight_number: number
+    public flight_number: number,
+    public airline: string,
+    public showFlightDetails: boolean = false,
   ) { }
 }

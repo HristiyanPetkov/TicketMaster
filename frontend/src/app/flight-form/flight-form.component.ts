@@ -44,8 +44,8 @@ export class FlightFormComponent {
     .subscribe(resp => this.gotoResults(resp));
   }
 
-  gotoResults(result: Result) {
-    this.router.navigate(['/results'], {state: { result }});
+  gotoResults(results: Result[]) {
+    this.router.navigate(['/results'], {state: { results }});
   }
 
   toggleArrival() {
@@ -122,6 +122,22 @@ export class FlightFormComponent {
     }
     if (!toInput.contains(target)) {
       this.showToResults = false;
+    }
+  }
+
+  currentOption = 'departure';
+  switchPosition = 0; // in pixels
+
+  switchOption() {
+    if (this.currentOption === 'departure') {
+      this.currentOption = 'arrival';
+      this.switchPosition = 12; // you will need to adjust this value according to your needs
+    } else if (this.currentOption === 'arrival') {
+      this.currentOption = 'both';
+      this.switchPosition = 24; // you will need to adjust this value according to your needs
+    } else if (this.currentOption === 'both') {
+      this.currentOption = 'departure';
+      this.switchPosition = 0;
     }
   }
 }

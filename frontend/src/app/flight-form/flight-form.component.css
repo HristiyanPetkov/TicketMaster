@@ -1,7 +1,7 @@
 button {
   outline: none !important;
-  background-color: gray !important;
-  border-color: gray !important;
+  background-color: rgb(83, 81, 81) !important;
+  border-color: rgb(88, 88, 88) !important;
 }
 
 .box {
@@ -9,3 +9,4 @@ button {
   /*make the background a gray color*/
   background-color: rgba(64, 61, 61, 0.455);
 }
+

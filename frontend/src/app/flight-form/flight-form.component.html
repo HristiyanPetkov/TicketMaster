@@ -1,7 +1,7 @@
 <form (ngSubmit)="get()" class="box max-w-6xl mx-auto bg-deep_blue p-8 rounded shadow-lg">
   <div class="relative">
     <label for="from" class="text-white text-4xl font-bold mb-2">From</label>
-    <input type="text" id="from" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="fromTerm" (input)="searchFrom()" [ngModelOptions]="{ standalone: true }" placeholder="Enter From">
+    <input type="text" id="from" class="border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="fromTerm" (input)="searchFrom()" [ngModelOptions]="{ standalone: true }" placeholder="Enter From">
     <ul *ngIf="fromResults.length > 0 && fromTerm && showFromResults" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
       <li *ngFor="let result of fromResults" class="cursor-pointer px-4 py-3 text-3xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectFrom(result)">{{ result.airport }} ({{ result.iata }})</li>
     </ul>
@@ -9,7 +9,7 @@
   </div>
   <div class="relative">
     <label for="to" class="text-white text-4xl font-bold mb-2 mt-6">To</label>
-    <input type="text" id="to" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="toTerm" (input)="searchTo()" [ngModelOptions]="{ standalone: true }" placeholder="Enter To">
+    <input type="text" id="to" class="border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="toTerm" (input)="searchTo()" [ngModelOptions]="{ standalone: true }" placeholder="Enter To">
     <ul *ngIf="toResults.length > 0 && toTerm && showToResults" class="absolute z-10 bg-white text-gray-800 shadow-md py-1 mt-2 w-full rounded-md">
       <li *ngFor="let result of toResults" class="cursor-pointer px-4 py-3 text-3xl text-left transition-colors duration-200 hover:bg-blue-200 border-b border-gray-300" (click)="selectTo(result)">{{ result.airport }} ({{ result.iata }})</li>
     </ul>
@@ -17,27 +17,27 @@
   </div>
   <div class="w-full mt-6">
     <label for="tickets" class="text-white text-4xl font-bold mb-2">Number of Tickets</label>
-    <input type="number" id="tickets" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="flight.amount" [ngModelOptions]="{ standalone: true }" placeholder="Enter Number of Tickets">
+    <input type="number" id="tickets" class="border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full" [(ngModel)]="flight.amount" [ngModelOptions]="{ standalone: true }" placeholder="Enter Number of Tickets">
   </div>
-  <div class="flex flex-wrap justify-between mt-6">
-    <div class="w-full md:w-5/12 mb-4 md:mb-0">
-      <div class="flex items-center">
-        <span class="text-white text-4xl font-bold mb-2 mr-2">Departure</span>
-        <button type="button" class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center focus:outline-none" (click)="toggleDeparture()">
-          <span class="h-4 w-4 rounded-full bg-blue-500"></span>
-        </button>
-      </div>
-      <input *ngIf="showDeparture" type="date" id="departure" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full mt-2" [(ngModel)]="flight.departureDate" [ngModelOptions]="{ standalone: true }" placeholder="Select Departure Date">
+  <div class="flex flex-wrap mt-6">
+    <div class="w-full">
+        <b>
+            <div class="relative flex bg-gray-600 rounded-md w-auto p-1 h-auto">
+                <div class="absolute left-0 top-0 h-full w-1/3 bg-green-300 rounded-md transition-all duration-300 ease-in-out" [ngStyle]="{'transform': currentOption === 'departure' ? 'translateX(0)' : currentOption === 'arrival' ? 'translateX(100%)' : 'translateX(200%)'}"></div>
+                <div class="relative h-16 w-1/3 text-center text-white text-4xl flex items-center justify-center cursor-pointer" (click)="currentOption = 'departure'">Departure</div>
+                <div class="relative h-16 w-1/3 text-center text-white text-4xl flex items-center justify-center border-l border-gray-400 cursor-pointer" (click)="currentOption = 'arrival'">Arrival</div>
+                <div class="relative h-16 w-1/3 text-center text-white text-4xl flex items-center justify-center border-l border-gray-400 cursor-pointer" (click)="currentOption = 'both'">Both</div>
+            </div>
+        </b>
     </div>
-    <div class="w-full md:w-5/12">
-      <div class="flex items-center">
-        <span class="text-white text-4xl font-bold mb-2 mr-2">Arrival</span>
-        <button type="button" class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center focus:outline-none" (click)="toggleArrival()">
-          <span class="h-4 w-4 rounded-full bg-blue-500"></span>
-        </button>
-      </div>
-      <input *ngIf="showArrival" type="date" id="arrival" class="border border-gray-400 border-solid border-2 px-4 py-3 rounded-md text-3xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full mt-2" [(ngModel)]="flight.arrivalDate" [ngModelOptions]="{ standalone: true }" placeholder="Select Arrival Date">
+    <div class="w-full md:w-1/2 mb-4 md:mb-0 mt-4 ml-auto">
+        <label *ngIf="currentOption === 'departure' || currentOption === 'both'" class="text-white text-5xl" for="departure">Departure Date</label>
+        <input *ngIf="currentOption === 'departure' || currentOption === 'both'" type="date" id="departure" class="border-gray-400 border-solid border-2 px-4 py-2 rounded-md text-4xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-96" [(ngModel)]="flight.departureDate" [ngModelOptions]="{ standalone: true }" placeholder="Select Departure Date">
+    </div>
+    <div class="w-full md:w-1/2 mb-4 md:mb-0 mt-4 ml-auto">
+        <label *ngIf="currentOption === 'arrival' || currentOption === 'both'" class="text-white text-5xl" for="arrival">Arrival Date</label>
+        <input *ngIf="currentOption === 'arrival' || currentOption === 'both'" type="date" id="arrival" class="border-gray-400 border-solid border-2 px-4 py-2 rounded-md text-4xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-96" [(ngModel)]="flight.arrivalDate" [ngModelOptions]="{ standalone: true }" placeholder="Select Arrival Date">
     </div>
   </div>
-  <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 mt-8 rounded">Search</button>
+  <button type="submit" class="hover:bg-blue-600 text-white font-bold py-4 px-8 mt-8 rounded">Search</button>
 </form>
