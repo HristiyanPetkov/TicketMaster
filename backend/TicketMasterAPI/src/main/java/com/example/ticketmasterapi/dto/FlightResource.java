@@ -3,6 +3,8 @@ package com.example.ticketmasterapi.dto;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class FlightResource {
@@ -12,4 +14,5 @@ public class FlightResource {
     private String arrivalAirport;
     private String departureAirport;
     private Float price;
+    private List<String> stops = new ArrayList<>();
 }

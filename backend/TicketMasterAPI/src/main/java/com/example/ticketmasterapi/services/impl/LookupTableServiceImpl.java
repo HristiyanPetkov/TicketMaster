@@ -26,12 +26,12 @@ public class LookupTableServiceImpl implements LookupTableService {
 
     @Override
     public String getAirport(String IATA) {
-        return lookupTableRepository.getLookupTableEntityByIATA(IATA).getAirport();
+        return lookupTableRepository.getByIATA(IATA).getAirport();
     }
 
     @Override
     public String getIATA(String airport) {
-        return lookupTableRepository.getLookupTableEntityByAirport(airport).getIATA();
+        return lookupTableRepository.getByAirport(airport).getIATA();
     }
 
     @Override

@@ -25,4 +25,12 @@ public class FlightEntity {
     private String arrivalIata;
     private String airline;
     private Float price;
+
+    public void setArrivalArrivalIata(String arrivalIata) {
+        this.arrivalIata = arrivalIata;
+    }
+
+    public void setArrivalDepartureIata(String departureIata) {
+        this.departureIata = departureIata;
+    }
 }

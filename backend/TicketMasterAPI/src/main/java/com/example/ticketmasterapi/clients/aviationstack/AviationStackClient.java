@@ -82,11 +82,26 @@ public class AviationStackClient {
         Timestamp currentTimestamp = new Timestamp(currentDate.getTime());
         Timestamp tomorrowTimestamp = new Timestamp(currentDate.getTime() + 86400000);
 
-        flights.add(new FlightEntity(101L, "10000", currentTimestamp , tomorrowTimestamp, "SOF", "VAR", "British Airways", 10000f));
-        flights.add(new FlightEntity(102L, "10001", currentTimestamp , tomorrowTimestamp, "SOF", "VAR", "Qatar Airways", 9000f));
-        flights.add(new FlightEntity(103L, "10001", currentTimestamp , tomorrowTimestamp, "VAR", "BKK", "Qatar Airways", 9000f));
-
+        FlightEntity tempFlight1 = new FlightEntity(101L, "10000", currentTimestamp , tomorrowTimestamp, "SOF", "VAR", "British Airways", 10000f);
+        FlightEntity tempFlight2 = new FlightEntity(102L, "10001", currentTimestamp , tomorrowTimestamp, "SOF", "VAR", "Qatar Airways", 9000f);
+        FlightEntity tempFlight3 = new FlightEntity(103L, "10001", currentTimestamp , tomorrowTimestamp, "VAR", "BKK", "Qatar Airways", 9000f);
+        flights.add(tempFlight1);
+        flights.add(tempFlight2);
+        flights.add(tempFlight3);
         flightRepository.saveAll(removeIncompleteFlights(flights));
+        System.out.println(tempFlight3);
+        FlightDto tempFlightDto1 = FLIGHT_MAPPER.toFlight(tempFlight1);
+        FlightDto tempFlightDto2 = FLIGHT_MAPPER.toFlight(tempFlight2);
+        FlightDto tempFlightDto3 = FLIGHT_MAPPER.toFlight(tempFlight3);
+        tempFlightDto1.departure.airport = "Sofia Airport";
+        tempFlightDto1.arrival.airport = "Varna Airport";
+        tempFlightDto2.departure.airport = "Sofia Airport";
+        tempFlightDto2.arrival.airport = "Varna Airport";
+        tempFlightDto3.departure.airport = "Varna Airport";
+        tempFlightDto3.arrival.airport = "Bangkok Airport";
+        flightsDto.add(tempFlightDto1);
+        flightsDto.add(tempFlightDto2);
+        flightsDto.add(tempFlightDto3);
         addAirports(flightsDto);
 
         System.out.println("Saved flights!");
@@ -94,10 +109,10 @@ public class AviationStackClient {
 
     private void addAirports(List<FlightDto> flights){
         for(FlightDto flightDto : flights) {
-            if(!lookupTableRepository.existsByAirportAndIATA(flightDto.departure.airport, flightDto.departure.iata))
+            if(validAirport(flightDto.departure.airport, flightDto.departure.iata))
                 lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByDeparture(flightDto));
 
-            if(!lookupTableRepository.existsByAirportAndIATA(flightDto.arrival.airport, flightDto.arrival.iata))
+            if(validAirport(flightDto.arrival.airport, flightDto.arrival.iata))
                 lookupTableRepository.save(LOOKUP_TABLE_MAPPER.fromFLightDtoByArrival(flightDto));
         }
     }
@@ -105,5 +120,9 @@ public class AviationStackClient {
     private List<FlightEntity> removeIncompleteFlights(List<FlightEntity> flights) {
         flights.removeIf(flight -> flight.getDepartureIata() == null || flight.getArrivalIata() == null || flight.getPrice() == null);
         return flights;
+    }
+
+    private boolean validAirport(String airport, String iata) {
+        return !lookupTableRepository.existsByAirportAndIATA(airport, iata) && airport != null && !airport.isEmpty() && iata != null && !iata.isEmpty();
     }
 }

@@ -8,9 +8,9 @@ import java.util.List;
 
 @Repository
 public interface LookupTableRepository extends JpaRepository<LookupTableEntity, Long> {
-    LookupTableEntity getLookupTableEntityByIATA(String IATA);
+    LookupTableEntity getByIATA(String IATA);
 
-    LookupTableEntity getLookupTableEntityByAirport(String airport);
+    LookupTableEntity getByAirport(String airport);
 
     List<LookupTableEntity> getAirportsByAirportContaining(String partialAirport);
 
