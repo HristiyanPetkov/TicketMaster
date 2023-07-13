@@ -13,6 +13,7 @@ public class FlightResource {
     private Timestamp arrival_date;
     private String arrivalAirport;
     private String departureAirport;
+    private String airline;
     private Float price;
     private List<String> stops = new ArrayList<>();
 }
