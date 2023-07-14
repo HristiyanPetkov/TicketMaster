@@ -9,7 +9,6 @@
     <p class="text-4xl">Arrival date: {{ results[0].arrivalDate.toLocaleString() }}</p>
     <p class="text-4xl">Amount: {{ results[0].amount }}</p>
     <p class="text-4xl">Cost: {{ results[0].cost }}</p>
-    <p class="text-4xl">IATA: {{ results[0].iata }}</p>
     <p class="text-4xl">Stops: {{ results[0].stops.join(', ') }}</p>
     <p class="text-4xl">Flight Number: {{ results[0].flight_number }}</p>
   </div>
@@ -34,7 +33,6 @@
           <p>Cost: {{ flight.cost }}</p>
           <div *ngIf="flight.showFlightDetails">
             <p>Amount: {{ flight.amount }}</p>
-            <p>IATA: {{ flight.iata }}</p>
             <p>Stops: {{ flight.stops.join(', ') }}</p>
             <p>Flight Number: {{ flight.flight_number }}</p>
           </div>

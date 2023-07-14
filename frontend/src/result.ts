@@ -6,7 +6,6 @@ export class Result {
     public arrivalDate: Date,
     public amount: number,
     public cost: number,
-    public iata: string,
     public stops: string[],
     public flight_number: number,
     public airline: string,

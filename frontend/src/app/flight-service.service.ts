@@ -4,6 +4,7 @@ import { Flight } from '../flight';
 import { Observable, map } from 'rxjs';
 import { Result } from 'src/result';
 import { environment } from 'src/environment/environment';
+import { Airport } from 'src/airport';
 
 
 @Injectable({
@@ -23,13 +24,13 @@ export class FlightServiceService {
       .set('arrival_date', new Date(flight.arrivalDate).toISOString())
       .set('departure_date', new Date(flight.departureDate).toISOString());
 
-    return this.http.get<Result[]>(`${this.flightUrl}/get`, { params: params });
+    return this.http.get<Result[]>(`${this.flightUrl}/getCheapestFlights`, { params: params });
   }
 
-  public getSuggestions(query: string): Observable<string[]> {
+  public getSuggestions(query: string): Observable<Airport[]> {
     const params = new HttpParams()
-      .set('query', query);
+      .set('search', query);
 
-    return this.http.get<string[]>(`${this.flightUrl}/search`, { params: params });
+    return this.http.get<Airport[]>(`${this.flightUrl}/search`, { params: params });
   }
 }

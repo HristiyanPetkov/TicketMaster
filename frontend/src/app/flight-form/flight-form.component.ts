@@ -59,6 +59,7 @@ export class FlightFormComponent {
   }
 
   gotoResults(results: Result[]) {
+    console.log(results);
     this.router.navigate(['/results'], { state: { results } });
   }
 
@@ -72,12 +73,7 @@ export class FlightFormComponent {
 
   searchFrom(): void {
     this.toggleAutocompleteFrom();
-    const params = new HttpParams().set('search', this.fromTerm);
-
-    this.http
-      .get<Airport[]>(`${environment.flightUrl}/search`, {
-        params: params,
-      })
+    this.flightService.getSuggestions(this.fromTerm)
       .subscribe(
         (response) => {
           this.fromResults = response;
@@ -90,12 +86,7 @@ export class FlightFormComponent {
 
   searchTo(): void {
     this.toggleAutocompleteTo();
-    const params = new HttpParams().set('search', this.toTerm);
-
-    this.http
-      .get<Airport[]>('http://127.0.0.1:8080/api/v1/ticketmaster/search', {
-        params: params,
-      })
+    this.flightService.getSuggestions(this.toTerm)
       .subscribe(
         (response) => {
           this.toResults = response;
@@ -103,7 +94,7 @@ export class FlightFormComponent {
         (error) => {
           console.error(error);
         }
-      );
+    );
   }
 
   selectFrom(result: Airport): void {

@@ -12,65 +12,23 @@ export class ResultsComponent implements OnInit {
   showMore: boolean = false;
 
   constructor(private route: ActivatedRoute) {
-    this.results = <Result[]>[
-      {
-        arrivalDate: new Date(),
-        departureDate: new Date(),
-        arrivalAirport: 'test',
-        departureAirport: 'test',
-        cost: 0,
-        airline: 'test',
-        flight_number: 0,
-        stops: [],
-        iata: 'test',
-        amount: 0,
-        showFlightDetails: false,
-      },
-      {
-        arrivalDate: new Date(),
-        departureDate: new Date(),
-        arrivalAirport: 'test',
-        departureAirport: 'test',
-        cost: 0,
-        airline: 'test',
-        flight_number: 0,
-        stops: [],
-        iata: 'test',
-        amount: 0,
-      },
-      {
-        arrivalDate: new Date(),
-        departureDate: new Date(),
-        arrivalAirport: 'test',
-        departureAirport: 'test',
-        cost: 0,
-        airline: 'test',
-        flight_number: 0,
-        stops: [],
-        iata: 'test',
-        amount: 0,
-      },
-      {
-        arrivalDate: new Date(),
-        departureDate: new Date(),
-        arrivalAirport: 'test',
-        departureAirport: 'test',
-        cost: 0,
-        airline: 'test',
-        flight_number: 0,
-        stops: [],
-        iata: 'test',
-        amount: 0,
-      },
-    ];
   }
 
   ngOnInit(): void {
-    this.results = {
-      ...history.state.results,
-      arrivalDate: new Date(history.state.result.arrival_date).toLocaleString(),
-      departureDate: new Date(history.state.result.departure_date).toLocaleString(),
-    };
+    this.results = history.state.results.map((result: any) => {
+      return new Result(
+        result.departureAirport,
+        result.arrivalAirport,
+        new Date(result.departure_date),
+        new Date(result.arrival_date),
+        0,
+        result.price,
+        result.stops,
+        result.flightNumber,
+        result.airline,
+      );
+    });
+
     console.log(this.results);
   }
 
