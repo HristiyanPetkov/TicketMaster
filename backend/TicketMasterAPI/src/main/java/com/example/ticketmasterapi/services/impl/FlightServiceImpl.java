@@ -98,6 +98,7 @@ public class FlightServiceImpl implements FlightService {
         String destinationIATA = lookupTableService.getIATA(destination);
         if(departureDate.after(yesterday)) {
             System.out.println(1);
+            System.out.println(getCheapestFlightWithStops(departureDate, originIATA, destinationIATA));
             return getCheapestFlightWithStops(departureDate, originIATA, destinationIATA);
         } else if(arrivalDate.after(yesterday)) {
             System.out.println(2);
@@ -200,6 +201,7 @@ public class FlightServiceImpl implements FlightService {
         String destinationIATA = lookupTableService.getIATA(destination);
         if(departureDate.after(yesterday)) {
             System.out.println(1);
+            System.out.println(getDesiredCheapestFlights(originIATA, destinationIATA, departureDate));
             return getDesiredCheapestFlights(originIATA, destinationIATA, departureDate);
         } else if(arrivalDate.after(yesterday)) {
             System.out.println(2);
